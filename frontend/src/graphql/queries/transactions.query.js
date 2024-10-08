@@ -24,18 +24,13 @@ export const GET_TRANSACTION = gql`
       amount
       location
       date
-      user {
-        name
-        username
-        profilePicture
-      }
     }
   }
 `;
 
 export const GET_CATEGORY_STATISTICS = gql`
   query GetCategoryStatistics {
-    categoryStatistic {
+    categoryStatistics {
       category
       totalAmount
     }
