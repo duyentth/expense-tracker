@@ -23,12 +23,11 @@ const TransactionForm = () => {
     try {
       await createTransaction({ variables: { input: transactionData } });
       toast.success("Transaction created successfully.", {
-        duration: 3000,
         position: "top-right",
       });
     } catch (error) {
       console.error("Error adding transaction: ", error);
-      toast.error(error.message);
+      toast.error(error.message, { position: "top-right" });
     }
   };
 

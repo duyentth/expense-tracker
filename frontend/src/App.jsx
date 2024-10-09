@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Header from "./components/ui/Header.jsx";
 import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query.js";
 import { useQuery } from "@apollo/client";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { loading, data } = useQuery(GET_AUTHENTICATED_USER);
@@ -35,6 +36,7 @@ function App() {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Toaster />
     </>
   );
 }

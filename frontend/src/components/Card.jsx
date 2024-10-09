@@ -36,10 +36,12 @@ const Card = ({ transaction }) => {
       await deleteTransaction({
         variables: { transactionId: transaction._id },
       });
-      toast.success("Transaction deleted successfully");
+      toast.success("Transaction deleted successfully", {
+        position: "bottom-right",
+      });
     } catch (error) {
       console.error("error deleting transaction: ", error);
-      toast.error(error.message, { duration: 3000, position: "bottom-center" });
+      toast.error(error.message, { position: "top-right" });
     }
   };
 

@@ -51,7 +51,7 @@ const HomePage = () => {
       client.resetStore();
     } catch (error) {
       console.error("Error Logging out: ", error);
-      toast.error(error.message);
+      toast.error(error.message, { position: "top-right" });
     }
   };
 

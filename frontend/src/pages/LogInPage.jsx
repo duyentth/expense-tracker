@@ -31,7 +31,7 @@ const LogInPage = () => {
       });
     } catch (error) {
       console.error("Error logining: ", error);
-      toast.error(error.message);
+      toast.error(error.message, { position: "top-center" });
     }
   };
 
