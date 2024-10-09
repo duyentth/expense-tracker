@@ -13,7 +13,7 @@ import https from "https";
   0 * * * * - every hour
 */
 
-const URL = "https://expense-tracker.onrender.com";
+const URL = "https://expense-tracker-fjcg.onrender.com";
 
 const job = new CronJob("*/14 * * * *", function () {
   https
