@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import http from "http";
+import path from "path";
 import { ApolloServer } from "@apollo/server";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { expressMiddleware } from "@apollo/server/express4";
@@ -16,6 +17,8 @@ import { buildContext } from "graphql-passport";
 
 dotenv.config();
 configurePassport();
+
+const __dirname = path.resolve();
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -62,6 +65,14 @@ app.use(
       }),
   })
 );
+/**
+ * set to let the application (both frontend and backend ) runs on render.com
+ * at the same domain localhost:4000
+ */
+app.use(express.static(path.join(__dirname, "frontend/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/dist", "index.html"));
+});
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
 await connectDB();
 console.log(`Server ready at : http://localhost:4000/graphql`);

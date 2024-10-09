@@ -10,7 +10,10 @@ import { LOG_OUT } from "../graphql/mutations/user.mutation";
 import toast from "react-hot-toast";
 import { GET_CATEGORY_STATISTICS } from "../graphql/queries/transactions.query";
 import { useEffect, useState } from "react";
-import { GET_AUTHENTICATED_USER } from "../graphql/queries/user.query";
+import {
+  GET_AUTHENTICATED_USER,
+  GET_USER_AND_TRANSACTIIONS,
+} from "../graphql/queries/user.query";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 // const chartData = {
@@ -70,7 +73,12 @@ const HomePage = () => {
 
   const { data } = useQuery(GET_CATEGORY_STATISTICS);
   const { data: authUserData } = useQuery(GET_AUTHENTICATED_USER);
-  console.log("authUserData: ", authUserData);
+  // const { data: userAndTransactionsData } = useQuery(
+  //   GET_USER_AND_TRANSACTIIONS,
+  //   { variables: { userId: authUserData.authUser._id } }
+  // );
+
+  // console.log("userAndTransactionsData: ", userAndTransactionsData);
 
   useEffect(() => {
     if (data?.categoryStatistics) {
@@ -132,9 +140,11 @@ const HomePage = () => {
           )}
         </div>
         <div className="flex flex-wrap w-full justify-center items-center gap-6">
-          <div className="h-[330px] w-[330px] md:h-[360px] md:w-[360px]  ">
-            <Doughnut data={chartData} />
-          </div>
+          {data?.categoryStatistics.length > 0 && (
+            <div className="h-[330px] w-[330px] md:h-[360px] md:w-[360px]  ">
+              <Doughnut data={chartData} />
+            </div>
+          )}
 
           <TransactionForm />
         </div>

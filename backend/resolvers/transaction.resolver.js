@@ -1,4 +1,5 @@
 import Transaction from "../models/transaction.model.js";
+import User from "../models/user.model.js";
 
 const transactionResolver = {
   Query: {
@@ -76,6 +77,17 @@ const transactionResolver = {
       } catch (error) {
         console.error("Error updating transaction: ", error);
         throw new Error(error.message || "Internal Server Error");
+      }
+    },
+  },
+  Transaction: {
+    user: async (parent) => {
+      try {
+        const user = await User.findById(parent.userId);
+        return user;
+      } catch (error) {
+        console.error("Error in transaction.user resolver: ", error);
+        throw new Error(error.message);
       }
     },
   },
