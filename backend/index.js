@@ -15,7 +15,7 @@ import passport from "passport";
 import connectMongodbSession from "connect-mongodb-session";
 import { buildContext } from "graphql-passport";
 
-import job from "./cron.js";
+//import job from "./cron.js";
 
 dotenv.config();
 configurePassport();
@@ -23,7 +23,7 @@ configurePassport();
 /**run the job sending GET request to https://expense-tracker.onrender.com)
   every 14 mins to make the application active on render
 */
-job.start();
+//job.start();
 
 const __dirname = path.resolve();
 
