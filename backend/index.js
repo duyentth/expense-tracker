@@ -14,18 +14,18 @@ import session from "express-session";
 import passport from "passport";
 import connectMongodbSession from "connect-mongodb-session";
 import { buildContext } from "graphql-passport";
+import { fileURLToPath } from "url";
 
+const __dirname = path.resolve();
+dotenv.config();
 //import job from "./cron.js";
 
-dotenv.config();
 configurePassport();
 
 /**run the job sending GET request to https://expense-tracker.onrender.com)
   every 14 mins to make the application active on render
 */
 //job.start();
-
-const __dirname = path.resolve();
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -36,10 +36,13 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 const MongoDBStore = connectMongodbSession(session);
+
 const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
+
   collection: "sessions",
 });
+
 store.on("error", (err) => console.log(err));
 app.use(
   session({

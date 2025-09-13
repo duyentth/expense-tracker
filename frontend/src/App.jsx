@@ -11,10 +11,11 @@ import { Toaster } from "react-hot-toast";
 
 function App() {
   const { loading, data } = useQuery(GET_AUTHENTICATED_USER);
+  console.log("data: ", data);
   if (loading) return <p>Page Loading... </p>;
   return (
     <>
-      {data.authUser && <Header />}
+      {data?.authUser && <Header />}
       <Routes>
         <Route
           path="/"
@@ -42,4 +43,3 @@ function App() {
 }
 
 export default App;
-
